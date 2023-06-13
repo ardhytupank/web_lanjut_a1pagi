@@ -1,0 +1,14 @@
+    <rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:dc="http://www.perceive.net/schemas/relationship/penciptaDari/">
+<rdf:Description
+rdf:about="http://example.org/#Soepratman">
+<dc:title>Jadwal Ujian</dc:title>
+</rdf:Description>
+</rdf:RDF>
+
+select ?ibukota ?etnis
+where {
+dbpedia-id:Kalimantan_Timur dbpedia-owl:capital ?ibukota.
+dbpedia-id:Kalimantan_Timur dbpedia-owl:ethnicGroup ?etnis.
+}
