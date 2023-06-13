@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>UTS</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <h1>Pembelian Produk</h1>
+            <p id="berhasil"></p>
+            <div class="form-group">
+              <label for="">Nama Produk</label>
+              <input type="text" class="form-control" id="nama_produk" placeholder="Input nama produk">
+              <p id="tampil_nama_produk" class="peringatan"></p>
+            </div>
+            <div class="form-group">
+              <label for="">Harga Produk</label>
+              <input type="number" class="form-control" id="harga_produk" placeholder="Input harga produk">
+              <p id="tampil_harga" class="peringatan"></p>
+            </div>
+            <div class="form-group">
+              <label for="">Qty Produk</label>
+              <input type="number" class="form-control" id="qty" placeholder="Input qty produk">
+              <p id="tampil_qty" class="peringatan"></p>
+            </div>
+            <div class="form-group">
+              <label for="">Jumlah Pembayaran</label>
+              <input type="number" class="form-control" id="jumlah_pembayaran" placeholder="Input jumlah pembayaran">
+              <p id="tampil_jumlah_bayar" class="peringatan"></p>
+            </div>
+            <div class="form-group mt-2" style="text-align: right;">
+              <button class="btn btn-warning" id="clear">Clear</button>
+              <button class="btn btn-info" id="pay">Pay</button>
+            </div>
+          </div>
+          <div class="col-sm-6" id="isi_berhasil">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $("#pay").click(function () {
+      var nama_produk = $("#nama_produk").val()
+      var harga_produk = $("#harga_produk").val()
+      var qty = $("#qty").val()
+      var jumlah_pembayaran = $("#jumlah_pembayaran").val()
+      if (nama_produk == "") {
+        $("#tampil_nama_produk").text("Nama Produk masih kosong!")
+      } else {
+        $("#tampil_nama_produk").text("")
+      }
+      if (harga_produk == "") {
+        $("#tampil_harga").text("Harga Produk masih kosong!")
+      } else {
+        $("#tampil_harga").text("")
+      }
+      if (qty == "") {
+        $("#tampil_qty").text("Qty Produk masih kosong!")
+      } else {
+        $("#tampil_qty").text("")
+      }
+      if (jumlah_pembayaran == "") {
+        $("#tampil_jumlah_bayar").text("Jumlah pembayaran masih kosong!")
+      } else {
+        $("#tampil_jumlah_bayar").text("")
+      }
+
+      var total_bayar = qty * harga_produk
+      var total_kembalian = jumlah_pembayaran - total_bayar
+      if (total_kembalian < 0) {
+        $("#tampil_jumlah_bayar").text("Jumlah bayar tidak mencukupi!")
+      } else {
+        $("#berhasil").html(`
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Successfully!</strong> Terimakasih telah melakukan pembelian.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        `)
+        $("#isi_berhasil").html(`
+        <h2>Total Pembayaran</h2>
+            <div class="row">
+              <div class="col-sm-5">
+                <p>Nama Produk</p>
+              </div>
+              <div class="col-sm-7">
+                <p>`+ nama_produk + `</p>
+              </div>
+              <div class="col-sm-5">
+                <p>Harga Produk</p>
+              </div>
+              <div class="col-sm-7">
+                <p>`+ harga_produk + `</p>
+              </div>
+              <div class="col-sm-5">
+                <p>Qty Produk</p>
+              </div>
+              <div class="col-sm-7">
+                <p>`+ qty + `</p>
+              </div>
+              <div class="col-sm-5">
+                <p>Total Bayar</p>
+              </div>
+              <div class="col-sm-7">
+                <h4>`+ total_bayar + `</h4>
+              </div>
+              <div class="col-sm-5">
+                <p>Jumlah Bayar</p>
+              </div>
+              <div class="col-sm-7">
+                <p>`+ jumlah_pembayaran + `</p>
+              </div>
+              <div class="col-sm-5">
+                <p>Jumlah Kembalian</p>
+              </div>
+              <div class="col-sm-7">
+                <h3 class="text-danger">`+ total_kembalian + `</h3>
+              </div>
+            </div>
+        `)
+        $("#tampil_jumlah_bayar").text("")
+      }
+
+    })
+  </script>
+
+</body>
+
+</html>
