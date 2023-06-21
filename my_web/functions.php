@@ -13,6 +13,5 @@ function q($data)
 
 function prodi()
 {
-    $koneksi = koneksi();
-    return mysqli_query($koneksi, "SELECT * FROM prodi");
+    return q("SELECT * FROM prodi");
 }
