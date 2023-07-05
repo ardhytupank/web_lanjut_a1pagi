@@ -6,7 +6,7 @@ require "functions.php";
 
 <p id="notif"></p>
 
-<div class="row">
+<div class="row" id="halaman-edit-prodi">
     <div class="col-sm-10">
         <label>Nama Prodi</label>
         <input type="text" class="form-control" id="nama_prodi" placeholder="Input nama prodi">
@@ -38,7 +38,7 @@ require "functions.php";
                     <td><?= $p["nama_prodi"]; ?></td>
                     <td><?= $p["edit"]; ?></td>
                     <td>
-                        <button class="btn btn-success btn-sm">
+                        <button class="btn btn-success btn-sm edit-prodi" id_prodi="<?= $p["id"]; ?>">
                             Edit
                         </button>
                         <button class="btn btn-sm btn-danger hapus-prodi" id_prodi="<?= $p["id"]; ?>">Hapus</button>
@@ -50,6 +50,18 @@ require "functions.php";
 </div>
 
 <script>
+    $(".edit-prodi").click(function() {
+        var id_prodi = $(this).attr("id_prodi")
+        $.ajax({
+            type: "POST",
+            url: "view/edit_prodi.php",
+            data: "id_prodi=" + id_prodi,
+            success: function(data) {
+                $("#halaman-edit-prodi").html(data)
+            }
+        })
+    })
+
     $(".hapus-prodi").click(function() {
         var id_prodi = $(this).attr("id_prodi")
         $.ajax({
