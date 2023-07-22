@@ -7,6 +7,12 @@ $(".halaman").click(function(){
         $("#halaman_body").load("halaman_beranda.php")
     }else if(id_halaman == "halaman_prodi"){
         $("#halaman_body").load("halaman_prodi.php")
+    }else if (id_halaman == "login") {
+        $("#halaman_body").load("view/login.php")
+    }else if (id_halaman == "registrasi") {
+        $("#halaman_body").load("view/registrasi.php")
+    }else if (id_halaman == "profile") {
+        $("#halaman_body").load("view/profile.php")
     }
 })
 
